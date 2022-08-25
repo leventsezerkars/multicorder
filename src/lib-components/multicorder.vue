@@ -328,7 +328,7 @@ export default /*#__PURE__*/ {
         if(this.recorderMode == "single") {
           this.setView("videoPlayer");
         }
-        this.$emit("new-recording", { name: data.name, size: data.size });
+        this.$emit("new-recording", { name: data.name, size: data.size,blob:data });
       }
     },
     async stopRecording() {
