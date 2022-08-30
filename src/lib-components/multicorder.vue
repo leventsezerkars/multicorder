@@ -314,7 +314,8 @@ export default /*#__PURE__*/ {
     },
     startVideoRecording() {
       const stream = this.$refs.video.srcObject;
-      const recorder = new MediaRecorder(stream);
+      var options = {mimeType: 'video/webm;codecs=h264'}; 
+      const recorder = new MediaRecorder(stream,options);
       this.recorder = recorder;
 
       this.recorder.ondataavailable = (event) => this.pushVideoData(event.data);
@@ -323,12 +324,13 @@ export default /*#__PURE__*/ {
     async pushVideoData(data) {
       if (data.size > 0) {
         const uid = await uuidv4();
-        data.name = "clip-" + uid + ".webm";
-        this.recordings.push(data);
+        data.name = "clip-" + uid + ".mp4";
+        var newblob = new Blob(data, {type: 'video/mp4'});
+        this.recordings.push(newblob);
         if(this.recorderMode == "single") {
           this.setView("videoPlayer");
         }
-        this.$emit("new-recording", { name: data.name, size: data.size,blob:data });
+        this.$emit("new-recording", { name: data.name, size: data.size, blob: newblob });
       }
     },
     async stopRecording() {
