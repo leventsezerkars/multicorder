@@ -18,6 +18,7 @@
       :height="height"
       :src="playerSource"
       :playsinline="playsinline"
+      controls
     />
   </div>
 </template>
@@ -325,12 +326,11 @@ export default /*#__PURE__*/ {
       if (data.size > 0) {
         const uid = await uuidv4();
         data.name = "clip-" + uid + ".mp4";
-        var newblob = new Blob(data, {type: 'video/mp4'});
-        this.recordings.push(newblob);
+        this.recordings.push(data);
         if(this.recorderMode == "single") {
           this.setView("videoPlayer");
         }
-        this.$emit("new-recording", { name: data.name, size: data.size, blob: newblob });
+        this.$emit("new-recording", { name: data.name, size: data.size, blob: data });
       }
     },
     async stopRecording() {
