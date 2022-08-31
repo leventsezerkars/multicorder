@@ -325,7 +325,7 @@ export default /*#__PURE__*/ {
     async pushVideoData(data) {
       if (data.size > 0) {
         const uid = await uuidv4();
-        data.name = "clip-" + uid + ".mp4";
+        data.name = "clip-" + uid + ".webm";
         this.recordings.push(data);
         if(this.recorderMode == "single") {
           this.setView("videoPlayer");
