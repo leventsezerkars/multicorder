@@ -22,7 +22,13 @@
     />
   </div>
 </template>
-
+<style scoped>
+  video,img {
+    width: 100%;
+    border-radius: 8px;
+    aspect-ratio: 16 / 9;
+  }
+</style>
 <script>
 import { v4 as uuidv4 } from "uuid";
 
